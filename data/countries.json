@@ -1,0 +1,788 @@
+{
+  "source": "https://www.worldometers.info/geography/how-many-countries-are-there-in-the-world/",
+  "year": 2026,
+  "updated": "2026-11-03",
+  "notes": "195-country 2026 population snapshot, from Worldometer, referencing UN Population Division estimates. Update using scripts/update_populations.py for newer data.",
+  "countries": [
+    {
+      "name": "India",
+      "population": 1476625576
+    },
+    {
+      "name": "China",
+      "population": 1412914089
+    },
+    {
+      "name": "United States",
+      "population": 349035494
+    },
+    {
+      "name": "Indonesia",
+      "population": 287886782
+    },
+    {
+      "name": "Pakistan",
+      "population": 259299792
+    },
+    {
+      "name": "Nigeria",
+      "population": 242431832
+    },
+    {
+      "name": "Brazil",
+      "population": 213562666
+    },
+    {
+      "name": "Bangladesh",
+      "population": 177818044
+    },
+    {
+      "name": "Russia",
+      "population": 143394458
+    },
+    {
+      "name": "Ethiopia",
+      "population": 138902185
+    },
+    {
+      "name": "Mexico",
+      "population": 132997658
+    },
+    {
+      "name": "Japan",
+      "population": 122427731
+    },
+    {
+      "name": "Egypt",
+      "population": 120101175
+    },
+    {
+      "name": "Philippines",
+      "population": 117724472
+    },
+    {
+      "name": "Democratic Republic of the Congo",
+      "population": 116452162
+    },
+    {
+      "name": "Vietnam",
+      "population": 102177431
+    },
+    {
+      "name": "Iran",
+      "population": 93168497
+    },
+    {
+      "name": "Turkey (Türkiye)",
+      "population": 87926082
+    },
+    {
+      "name": "Germany",
+      "population": 83644258
+    },
+    {
+      "name": "Tanzania",
+      "population": 72563780
+    },
+    {
+      "name": "Thailand",
+      "population": 71559614
+    },
+    {
+      "name": "United Kingdom",
+      "population": 69931528
+    },
+    {
+      "name": "France",
+      "population": 66746401
+    },
+    {
+      "name": "South Africa",
+      "population": 65453084
+    },
+    {
+      "name": "Italy",
+      "population": 58926166
+    },
+    {
+      "name": "Kenya",
+      "population": 58636412
+    },
+    {
+      "name": "Myanmar",
+      "population": 55184819
+    },
+    {
+      "name": "Colombia",
+      "population": 53936226
+    },
+    {
+      "name": "Sudan",
+      "population": 53282719
+    },
+    {
+      "name": "Uganda",
+      "population": 52761470
+    },
+    {
+      "name": "South Korea",
+      "population": 51600388
+    },
+    {
+      "name": "Algeria",
+      "population": 48028334
+    },
+    {
+      "name": "Iraq",
+      "population": 48007437
+    },
+    {
+      "name": "Spain",
+      "population": 47850793
+    },
+    {
+      "name": "Argentina",
+      "population": 46003734
+    },
+    {
+      "name": "Afghanistan",
+      "population": 45047068
+    },
+    {
+      "name": "Yemen",
+      "population": 42961653
+    },
+    {
+      "name": "Canada",
+      "population": 40467728
+    },
+    {
+      "name": "Angola",
+      "population": 40215180
+    },
+    {
+      "name": "Ukraine",
+      "population": 39535848
+    },
+    {
+      "name": "Morocco",
+      "population": 38762441
+    },
+    {
+      "name": "Poland",
+      "population": 37843188
+    },
+    {
+      "name": "Uzbekistan",
+      "population": 37724223
+    },
+    {
+      "name": "Mozambique",
+      "population": 36639850
+    },
+    {
+      "name": "Malaysia",
+      "population": 36385115
+    },
+    {
+      "name": "Ghana",
+      "population": 35697557
+    },
+    {
+      "name": "Saudi Arabia",
+      "population": 35165787
+    },
+    {
+      "name": "Peru",
+      "population": 34922148
+    },
+    {
+      "name": "Madagascar",
+      "population": 33522052
+    },
+    {
+      "name": "Côte d'Ivoire",
+      "population": 33494346
+    },
+    {
+      "name": "Cameroon",
+      "population": 30640817
+    },
+    {
+      "name": "Nepal",
+      "population": 29629410
+    },
+    {
+      "name": "Niger",
+      "population": 28814878
+    },
+    {
+      "name": "Venezuela",
+      "population": 28633711
+    },
+    {
+      "name": "Australia",
+      "population": 27227096
+    },
+    {
+      "name": "North Korea",
+      "population": 26633691
+    },
+    {
+      "name": "Syria",
+      "population": 26472497
+    },
+    {
+      "name": "Mali",
+      "population": 25932275
+    },
+    {
+      "name": "Burkina Faso",
+      "population": 24601700
+    },
+    {
+      "name": "Sri Lanka",
+      "population": 23348315
+    },
+    {
+      "name": "Malawi",
+      "population": 22785535
+    },
+    {
+      "name": "Zambia",
+      "population": 22521915
+    },
+    {
+      "name": "Chad",
+      "population": 21560380
+    },
+    {
+      "name": "Kazakhstan",
+      "population": 21083626
+    },
+    {
+      "name": "Somalia",
+      "population": 20305907
+    },
+    {
+      "name": "Chile",
+      "population": 19945850
+    },
+    {
+      "name": "Senegal",
+      "population": 19366548
+    },
+    {
+      "name": "Guatemala",
+      "population": 18967978
+    },
+    {
+      "name": "Romania",
+      "population": 18800605
+    },
+    {
+      "name": "Netherlands",
+      "population": 18448775
+    },
+    {
+      "name": "Ecuador",
+      "population": 18444506
+    },
+    {
+      "name": "Cambodia",
+      "population": 18051219
+    },
+    {
+      "name": "Zimbabwe",
+      "population": 17273580
+    },
+    {
+      "name": "Guinea",
+      "population": 15441992
+    },
+    {
+      "name": "Benin",
+      "population": 15170420
+    },
+    {
+      "name": "Rwanda",
+      "population": 14889693
+    },
+    {
+      "name": "Burundi",
+      "population": 14729157
+    },
+    {
+      "name": "Bolivia",
+      "population": 12749291
+    },
+    {
+      "name": "South Sudan",
+      "population": 12436037
+    },
+    {
+      "name": "Tunisia",
+      "population": 12415138
+    },
+    {
+      "name": "Haiti",
+      "population": 12037506
+    },
+    {
+      "name": "Belgium",
+      "population": 11774642
+    },
+    {
+      "name": "Dominican Republic",
+      "population": 11609500
+    },
+    {
+      "name": "Jordan",
+      "population": 11589532
+    },
+    {
+      "name": "United Arab Emirates",
+      "population": 11574682
+    },
+    {
+      "name": "Honduras",
+      "population": 11184760
+    },
+    {
+      "name": "Tajikistan",
+      "population": 10978598
+    },
+    {
+      "name": "Papua New Guinea",
+      "population": 10947848
+    },
+    {
+      "name": "Cuba",
+      "population": 10892659
+    },
+    {
+      "name": "Sweden",
+      "population": 10701046
+    },
+    {
+      "name": "Czech Republic (Czechia)",
+      "population": 10527780
+    },
+    {
+      "name": "Azerbaijan",
+      "population": 10454855
+    },
+    {
+      "name": "Portugal",
+      "population": 10395362
+    },
+    {
+      "name": "Togo",
+      "population": 9930918
+    },
+    {
+      "name": "Greece",
+      "population": 9897116
+    },
+    {
+      "name": "Israel",
+      "population": 9647689
+    },
+    {
+      "name": "Hungary",
+      "population": 9585818
+    },
+    {
+      "name": "Austria",
+      "population": 9107266
+    },
+    {
+      "name": "Switzerland",
+      "population": 9007798
+    },
+    {
+      "name": "Sierra Leone",
+      "population": 8996744
+    },
+    {
+      "name": "Belarus",
+      "population": 8937018
+    },
+    {
+      "name": "Laos",
+      "population": 7974018
+    },
+    {
+      "name": "Turkmenistan",
+      "population": 7736632
+    },
+    {
+      "name": "Libya",
+      "population": 7539852
+    },
+    {
+      "name": "Kyrgyzstan",
+      "population": 7400464
+    },
+    {
+      "name": "Nicaragua",
+      "population": 7097329
+    },
+    {
+      "name": "Paraguay",
+      "population": 7095279
+    },
+    {
+      "name": "Bulgaria",
+      "population": 6667660
+    },
+    {
+      "name": "Serbia",
+      "population": 6641964
+    },
+    {
+      "name": "Republic of the Congo",
+      "population": 6637786
+    },
+    {
+      "name": "El Salvador",
+      "population": 6391254
+    },
+    {
+      "name": "Denmark",
+      "population": 6023520
+    },
+    {
+      "name": "Singapore",
+      "population": 5905748
+    },
+    {
+      "name": "Lebanon",
+      "population": 5897467
+    },
+    {
+      "name": "Liberia",
+      "population": 5853949
+    },
+    {
+      "name": "Central African Republic",
+      "population": 5698984
+    },
+    {
+      "name": "State of Palestine",
+      "population": 5692790
+    },
+    {
+      "name": "Oman",
+      "population": 5671458
+    },
+    {
+      "name": "Norway",
+      "population": 5652989
+    },
+    {
+      "name": "Finland",
+      "population": 5621739
+    },
+    {
+      "name": "Mauritania",
+      "population": 5461319
+    },
+    {
+      "name": "Slovakia",
+      "population": 5451342
+    },
+    {
+      "name": "Ireland",
+      "population": 5356950
+    },
+    {
+      "name": "New Zealand",
+      "population": 5287479
+    },
+    {
+      "name": "Costa Rica",
+      "population": 5174789
+    },
+    {
+      "name": "Kuwait",
+      "population": 5102773
+    },
+    {
+      "name": "Panama",
+      "population": 4625718
+    },
+    {
+      "name": "Croatia",
+      "population": 3822345
+    },
+    {
+      "name": "Georgia",
+      "population": 3804642
+    },
+    {
+      "name": "Eritrea",
+      "population": 3682669
+    },
+    {
+      "name": "Mongolia",
+      "population": 3556798
+    },
+    {
+      "name": "Uruguay",
+      "population": 3382537
+    },
+    {
+      "name": "Qatar",
+      "population": 3173559
+    },
+    {
+      "name": "Namibia",
+      "population": 3153246
+    },
+    {
+      "name": "Bosnia and Herzegovina",
+      "population": 3114242
+    },
+    {
+      "name": "Moldova",
+      "population": 2961253
+    },
+    {
+      "name": "Armenia",
+      "population": 2930915
+    },
+    {
+      "name": "Gambia",
+      "population": 2884079
+    },
+    {
+      "name": "Jamaica",
+      "population": 2833404
+    },
+    {
+      "name": "Lithuania",
+      "population": 2797338
+    },
+    {
+      "name": "Albania",
+      "population": 2751025
+    },
+    {
+      "name": "Gabon",
+      "population": 2647400
+    },
+    {
+      "name": "Botswana",
+      "population": 2603388
+    },
+    {
+      "name": "Lesotho",
+      "population": 2389336
+    },
+    {
+      "name": "Guinea-Bissau",
+      "population": 2297808
+    },
+    {
+      "name": "Slovenia",
+      "population": 2114574
+    },
+    {
+      "name": "Equatorial Guinea",
+      "population": 1984468
+    },
+    {
+      "name": "Latvia",
+      "population": 1835935
+    },
+    {
+      "name": "North Macedonia",
+      "population": 1804062
+    },
+    {
+      "name": "Bahrain",
+      "population": 1675572
+    },
+    {
+      "name": "Trinidad and Tobago",
+      "population": 1513268
+    },
+    {
+      "name": "Timor-Leste",
+      "population": 1436923
+    },
+    {
+      "name": "Cyprus",
+      "population": 1382334
+    },
+    {
+      "name": "Estonia",
+      "population": 1331062
+    },
+    {
+      "name": "Eswatini",
+      "population": 1269859
+    },
+    {
+      "name": "Mauritius",
+      "population": 1265059
+    },
+    {
+      "name": "Djibouti",
+      "population": 1199459
+    },
+    {
+      "name": "Fiji",
+      "population": 937282
+    },
+    {
+      "name": "Comoros",
+      "population": 899010
+    },
+    {
+      "name": "Solomon Islands",
+      "population": 858288
+    },
+    {
+      "name": "Guyana",
+      "population": 840890
+    },
+    {
+      "name": "Bhutan",
+      "population": 802214
+    },
+    {
+      "name": "Luxembourg",
+      "population": 687448
+    },
+    {
+      "name": "Suriname",
+      "population": 645256
+    },
+    {
+      "name": "Montenegro",
+      "population": 626233
+    },
+    {
+      "name": "Malta",
+      "population": 549011
+    },
+    {
+      "name": "Maldives",
+      "population": 531517
+    },
+    {
+      "name": "Cabo Verde",
+      "population": 529630
+    },
+    {
+      "name": "Brunei",
+      "population": 469775
+    },
+    {
+      "name": "Belize",
+      "population": 428644
+    },
+    {
+      "name": "Bahamas",
+      "population": 404628
+    },
+    {
+      "name": "Iceland",
+      "population": 402329
+    },
+    {
+      "name": "Vanuatu",
+      "population": 342564
+    },
+    {
+      "name": "Barbados",
+      "population": 282724
+    },
+    {
+      "name": "São Tomé and Príncipe",
+      "population": 244994
+    },
+    {
+      "name": "Samoa",
+      "population": 220528
+    },
+    {
+      "name": "Saint Lucia",
+      "population": 180488
+    },
+    {
+      "name": "Kiribati",
+      "population": 138445
+    },
+    {
+      "name": "Seychelles",
+      "population": 134959
+    },
+    {
+      "name": "Grenada",
+      "population": 117362
+    },
+    {
+      "name": "Micronesia",
+      "population": 114182
+    },
+    {
+      "name": "Tonga",
+      "population": 103291
+    },
+    {
+      "name": "Saint Vincent and the Grenadines",
+      "population": 99244
+    },
+    {
+      "name": "Antigua and Barbuda",
+      "population": 94626
+    },
+    {
+      "name": "Andorra",
+      "population": 83753
+    },
+    {
+      "name": "Dominica",
+      "population": 65511
+    },
+    {
+      "name": "Saint Kitts and Nevis",
+      "population": 46992
+    },
+    {
+      "name": "Liechtenstein",
+      "population": 40368
+    },
+    {
+      "name": "Monaco",
+      "population": 38087
+    },
+    {
+      "name": "Marshall Islands",
+      "population": 35075
+    },
+    {
+      "name": "San Marino",
+      "population": 33605
+    },
+    {
+      "name": "Palau",
+      "population": 17614
+    },
+    {
+      "name": "Nauru (Naoero)",
+      "population": 12101
+    },
+    {
+      "name": "Tuvalu",
+      "population": 9362
+    },
+    {
+      "name": "Holy See (Vatican City)",
+      "population": 506
+    }
+  ]
+}

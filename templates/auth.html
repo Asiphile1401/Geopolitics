@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="panel narrow">
+  <p class="eyebrow">SECURE ACCESS</p><h1>{{ mode }}</h1>
+  <p class="muted">{% if mode == 'Register' %}Create your game account.{% else %}Welcome back, commander.{% endif %}</p>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Username <input name="username" minlength="3" maxlength="24" pattern="[A-Za-z0-9_]+" required autocomplete="username"></label>
+    <label>Password <input type="password" name="password" minlength="10" maxlength="128" required autocomplete="{% if mode == 'Register' %}new-password{% else %}current-password{% endif %}"></label>
+    <button type="submit">{{ mode }}</button>
+  </form>
+  <p class="muted">{% if mode == 'Register' %}Have an account? <a href="{{ url_for('login') }}">Log in</a>.{% else %}New here? <a href="{{ url_for('register') }}">Create an account</a>.{% endif %}</p>
+</section>
+{% endblock %}

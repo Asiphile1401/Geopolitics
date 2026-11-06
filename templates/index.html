@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">TURN-BASED WORLD STRATEGY</p>
+  <h1>Ten nations. One world to conquer.</h1>
+  <p>Command an army, challenge strategic computer opponents, and watch the dice determine the fate of every territory. Complete a conquest to win.</p>
+  <a class="button light" href="{{ url_for('create_new_game') if current_user.is_authenticated else url_for('register') }}">{{ 'Start a new game' if current_user.is_authenticated else 'Sign up to play' }}</a>
+</section>
+{% if current_user.is_authenticated %}
+<section>
+  <div class="section-heading"><h2>Your game sessions</h2><p>Switch between saved games at any time.</p></div>
+  <div class="cards">
+    {% for g in my_games %}<a class="game-card" href="{{ url_for('game_page', game_id=g.id) }}"><strong>{{ g.title }}</strong><span>Round {{ g.round }} · {{ g.status|title }}</span><span>{{ g.turn_name }} is next</span></a>
+    {% else %}<p class="muted">No games yet — create one above.</p>{% endfor %}
+  </div>
+</section>
+{% endif %}
+<section>
+  <div class="section-heading"><h2>Public games</h2><p>Anyone may watch. Only each game's authenticated owner may make moves.</p></div>
+  <div class="cards">
+    {% for g in games %}<a class="game-card" href="{{ url_for('game_page', game_id=g.id) }}"><strong>{{ g.title }}</strong><span>Round {{ g.round }} · {{ g.status|title }}</span><span>{{ g.turn_name }} is next</span></a>
+    {% else %}<p class="muted">No active public games yet.</p>{% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>{{ title or "World Conquest | INF4001N" }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{{ url_for('index') }}">🌍World Conquest🔫</a>
+    <nav aria-label="Site navigation">
+      <a href="{{ url_for('index') }}">Games</a>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('create_new_game') }}">New game</a>
+        <span class="account">{{ current_user.username }}</span>
+        <form action="{{ url_for('logout') }}" method="post" class="inline-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="nav-logout">Log out</button>
+        </form>
+      {% else %}
+        <a href="{{ url_for('login') }}">Log in</a>
+        <a href="{{ url_for('register') }}">Create account</a>
+      {% endif %}
+    </nav>
+  </header>
+  <main>
+    {% with messages = get_flashed_messages() %}{% if messages %}
+      <div class="messages" role="alert">{% for message in messages %}<p>{{ message }}</p>{% endfor %}</div>
+    {% endif %}{% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer>UCT INF4001N · Single-player geopolitics game · Flask + MongoDB</footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="panel narrow">
+  <p class="eyebrow">START A CAMPAIGN</p><h1>New geopolitics game</h1>
+  <p>Choose your starting nation. Nine other countries will be randomly chosen, and the game will select who moves first. Each country starts with its population-based army.</p>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Find a country
+      <input type="search" id="country-search" placeholder="Search all 195 countries" autocomplete="off">
+    </label>
+    <p id="country-count" class="small muted" aria-live="polite">{{ countries|length }} available countries</p>
+    <label>Your home country
+      <select name="country" id="country-select" required>{% for c in countries %}<option value="{{ c.name }}">{{ c.name }} · {{ c.starting_soldiers }} soldiers</option>{% endfor %}</select>
+    </label>
+    <button type="submit">Create game</button>
+  </form>
+  <p class="small muted">195-country population snapshot (2026). Source: Worldometer; stored in <code>data/countries.json</code>.</p>
+</section>
+{% endblock %}
+
+{% block scripts %}<script defer src="{{ url_for('static', filename='new_game.js') }}"></script>{% endblock %}

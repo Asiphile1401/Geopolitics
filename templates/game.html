@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="game-root"
+     data-state-url="{{ url_for('game_state', game_id=game.id) }}"
+     data-step-url="{{ url_for('npc_step', game_id=game.id) }}"
+     data-owner="{{ 'true' if is_owner else 'false' }}"
+     data-human-turn="{{ 'true' if game.is_human_turn else 'false' }}">
+  <section class="game-heading">
+    <div><p class="eyebrow">LIVE STRATEGY BOARD · GAME {{ game.id[-6:] }}</p>
+      <h1>World Conquest <span class="status" id="game-status">{{ game.status|upper }}</span></h1>
+      <p class="muted"><span id="round-label">Round {{ game.round }}</span> · <strong id="turn-label">{{ game.turn_name }}</strong> to move · <span id="phase-label">{{ game.phase|replace('_', ' ')|title }}</span></p>
+    </div>
+    <div class="game-tools">
+      <button class="secondary" type="button" id="copy-link">Copy spectator link</button>
+      {% if not is_owner %}<span class="pill">View only</span>{% else %}<span class="pill">Game owner</span>{% endif %}
+    </div>
+  </section>
+  {% if game.status == 'finished' %}
+    <section class="win-banner">🏆 Campaign complete —
+      {% for p in game.players if p.id == game.winner %}{{ p.name }} conquered every nation.{% endfor %}
+    </section>
+  {% endif %}
+  <section class="scoreboard" aria-label="Player scoreboard" id="scoreboard">
+    {% for p in game.players %}
+      {% set territories = game.countries.values() | selectattr('owner', 'equalto', p.id) | list %}
+      <article class="player-card" data-player-id="{{ p.id }}">
+        <div><span class="player-dot {{ 'player-human' if p.kind == 'human' else 'player-npc' }}"></span>
+          <strong>{{ p.name }}</strong> <span class="small muted">{{ 'YOU' if p.kind == 'human' else 'NPC' }}</span></div>
+        <p><strong data-territories>{{ territories|length }}</strong> territories <span class="separator">·</span> <strong data-armies>{{ territories|sum(attribute='soldiers') }}</strong> soldiers</p>
+        <p class="small muted"><span data-player-attacks>{{ game.statistics[p.id].attacks }}</span> attacks · <span data-player-conquests>{{ game.statistics[p.id].conquests }}</span> conquests</p>
+        <span class="small" data-player-status>{{ 'IN GAME' if territories|length else 'ELIMINATED' }}</span>
+      </article>
+    {% endfor %}
+  </section>
+  <div class="game-columns">
+    <div class="board-column">
+      <section class="panel">
+        <div class="section-heading"><h2>Territory overview</h2><p>All ten countries are visible, even those not yet claimed. Distance does not restrict attacks.</p></div>
+        <div class="table-wrap">
+          <table id="country-table">
+            <thead><tr><th>Country</th><th>Population</th><th>Controller</th><th class="right">Soldiers</th></tr></thead>
+            <tbody>
+              {% for name,c in game.countries.items() %}
+                <tr data-country-name="{{ name }}" class="{{ 'own-row' if c.owner == 'human' else '' }}">
+                  <td class="country-name">{{ name }}</td>
+                  <td class="muted">{{ '{:,}'.format(c.population) }}</td>
+                  <td data-controller>{% for p in game.players if p.id == c.owner %}{{ p.name }}{% else %}Unclaimed{% endfor %}</td>
+                  <td class="right"><strong class="army-count" data-soldiers>{{ c.soldiers }}</strong></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="section-heading"><h2>Latest dice battle</h2><p>Each die represents one soldier. Equal rolls cause no losses.</p></div>
+        <div class="dice-stage" id="dice-stage" aria-live="polite">
+          {% set recent_dice = game.events | selectattr('kind', 'equalto', 'dice') | list %}
+          {% if recent_dice %}
+            {% set battle = recent_dice[-1] %}
+            <p class="small muted">{{ battle.source }} (attack) versus {{ battle.target }} (defence)</p>
+            <div class="dice-line">Attacker: {% for die in battle.attacker_rolls %}<span class="die attack-die">{{ die }}</span>{% endfor %}</div>
+            <div class="dice-line">Defender: {% for die in battle.defender_rolls %}<span class="die defend-die">{{ die }}</span>{% endfor %}</div>
+            <p>{{ battle.source }} −{{ battle.attacker_losses }} soldiers · {{ battle.target }} −{{ battle.defender_losses }} soldiers</p>
+          {% else %}<p class="muted">No dice have been rolled yet.</p>{% endif %}
+        </div>
+      </section>
+    </div>
+    <div class="control-column">
+      {% if is_owner and game.status == 'active' %}
+        {% if not human_alive %}
+          <section class="panel"><h2>You have been eliminated</h2><p>All your territories are lost. You can still watch the remaining computer opponents or simulate their turns.</p></section>
+        {% elif game.is_human_turn %}
+          <section class="panel action-panel">
+            <p class="eyebrow">YOUR TURN · ROUND {{ game.round }}</p>
+            {% if game.phase == 'reinforce' %}
+              <h2>Allocate reinforcements</h2>
+              <p>You received <strong>{{ game.pending_reinforcements }}</strong> soldiers (two for every country you own). You must allocate all of them before acting.</p>
+              <form method="post" action="{{ url_for('game_action', game_id=game.id) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                {% for name,c in game.countries.items() if c.owner == 'human' %}
+                  <label>{{ name }} <span class="muted small">({{ c.soldiers }} soldiers now)</span>
+                    <input type="number" name="alloc_{{ loop.index0 }}" min="0" max="{{ game.pending_reinforcements }}" value="{{ game.pending_reinforcements if loop.first else 0 }}" required>
+                  </label>
+                {% endfor %}
+                <button name="action" value="reinforce">Allocate {{ game.pending_reinforcements }} soldiers</button>
+              </form>
+            {% elif game.phase == 'action' %}
+              <h2>Your strategic decisions</h2>
+              <p>Transfer soldiers between your countries as many times as needed, then start <strong>one attack</strong> or skip. Every source country must keep one soldier.</p>
+              <details open class="action-section">
+                <summary>⚔️ Attack a territory</summary>
+                <form method="post" action="{{ url_for('game_action', game_id=game.id) }}">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <label>Attack from <select name="attack_source" required>
+                    {% for name,c in game.countries.items() if c.owner == 'human' and c.soldiers >= 2 %}<option value="{{ name }}">{{ name }} · {{ c.soldiers }} soldiers</option>{% endfor %}
+                  </select></label>
+                  <label>Enemy target <select name="attack_target" required>
+                    {% for name,c in game.countries.items() if c.owner != 'human' %}<option value="{{ name }}">{{ name }} · {{ c.soldiers }} defenders</option>{% endfor %}
+                  </select></label>
+                  <button name="action" value="attack">Begin attack</button>
+                </form>
+              </details>
+              <details class="action-section">
+                <summary>⇄ Transfer troops</summary>
+                <form method="post" action="{{ url_for('game_action', game_id=game.id) }}">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <label>From <select name="from_country" required>{% for name,c in game.countries.items() if c.owner == 'human' %}<option value="{{ name }}">{{ name }} ({{ c.soldiers }})</option>{% endfor %}</select></label>
+                  <label>To <select name="to_country" required>{% for name,c in game.countries.items() if c.owner == 'human' %}<option value="{{ name }}">{{ name }}</option>{% endfor %}</select></label>
+                  <label>Soldiers <input type="number" min="1" name="amount" value="1" required></label>
+                  <button name="action" value="transfer" class="secondary">Transfer soldiers</button>
+                </form>
+              </details>
+              <form method="post" action="{{ url_for('game_action', game_id=game.id) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" name="action" value="skip" class="subtle">Skip turn →</button>
+              </form>
+            {% elif game.phase == 'attacking' %}
+              <h2>Battle underway</h2>
+              <p>You are attacking <strong>{{ game.attack.target }}</strong> from <strong>{{ game.attack.source }}</strong>. You can roll again or stop and end your turn. Each side rolls {{ [game.countries[game.attack.source].soldiers - 1, game.countries[game.attack.target].soldiers] | min }} dice.</p>
+              <form method="post" action="{{ url_for('game_action', game_id=game.id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button name="action" value="roll">🎲 Roll next combat phase</button></form>
+              <form method="post" action="{{ url_for('game_action', game_id=game.id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button name="action" value="stop" class="subtle">Stop attack and end turn</button></form>
+            {% elif game.phase == 'conquer_transfer' %}
+              <h2>Territory conquered!</h2>
+              <p><strong>{{ game.attack.target }}</strong> has been secured. You may send additional troops from {{ game.attack.source }}; at least one must remain behind.</p>
+              <form method="post" action="{{ url_for('game_action', game_id=game.id) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <label>Extra troops to move (0–{{ game.countries[game.attack.source].soldiers - 1 }})
+                  <input name="additional" type="number" min="0" max="{{ game.countries[game.attack.source].soldiers - 1 }}" value="0" required>
+                </label>
+                <button name="action" value="occupy">Confirm and end turn</button>
+              </form>
+            {% endif %}
+          </section>
+        {% endif %}
+        {% if not game.is_human_turn %}
+          <section class="panel action-panel" id="npc-controls">
+            <p class="eyebrow">COMPUTER SIMULATION</p><h2>NPC in command</h2>
+            <p id="npc-progress">{{ game.turn_name }} is deciding its next move. Each step will display the decision and battle events.</p>
+            <div class="button-stack"><button id="step-npc" type="button" class="secondary">Play next NPC decision</button>
+              <button id="fast-forward" type="button">⏩ Fast-forward until your turn</button></div>
+            <p id="simulation-message" class="small muted" role="status"></p>
+          </section>
+        {% endif %}
+      {% elif not is_owner %}
+        <section class="panel"><h2>Spectator mode</h2><p>This game is publicly viewable, but only the logged-in game owner can move armies. The board refreshes automatically as turns progress.</p></section>
+      {% endif %}
+      <section class="panel log-panel">
+        <div class="section-heading"><h2>Battle & decision history</h2><p>Game events, dice outcomes and NPC reasoning.</p></div>
+        <div id="battle-log" class="log" aria-live="polite">
+          {% for e in game.events|reverse %}
+            <article class="event event-{{ e.kind }}">
+              <span class="event-meta">ROUND {{ e.round }} · {{ e.kind|upper }}{% if e.kind == 'commentary' %} · {{ 'AI' if e.mode == 'ai' else 'OFFLINE NARRATION' }}{% endif %}</span>
+              <p>{{ e.text }}</p>
+            </article>
+          {% else %}<p>No events yet.</p>{% endfor %}
+        </div>
+        <p class="small muted">Commentary provider: {{ 'AI configured (offline fallback on API errors)' if narrator_enabled else 'Offline narration — configure AI_API_URL, AI_API_KEY and AI_MODEL to enable an LLM' }}.</p>
+      </section>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script defer src="{{ url_for('static', filename='game.js') }}"></script>{% endblock %}
