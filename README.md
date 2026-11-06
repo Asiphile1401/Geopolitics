@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # INF4001N — Geopolitics Game (improved Flask application)
 
 A single-player, ten-country strategy game based on the **University of Cape Town INF4001N 2027 Honours Entrance Exam** brief. A human plays against three rule-based, strategic NPCs. Gameplay is public to spectators; only the authenticated owner can make moves. Multiple games can be saved and resumed independently.
@@ -145,3 +146,6 @@ Submit to the **INF4001 Amathuba** assignment folder:
 #   G e o p o l i t i c s  
  #   G e o p o l i t i c s  
  
+=======
+# Geopolitics
+>>>>>>> 539e666369763a3bad8ac70c9ee1a354ef2930ea
